@@ -65,10 +65,6 @@ export const userUpdateService = async (
   const userRepository = AppDataSource.getRepository(User);
   const allUsers = await userRepository.find();
   const accountUpdated = allUsers.find((user) => user.id === id);
-  const usertest: Partial<User> = {
-
-  };
-  console.log(usertest);
 
 
   const data = Object.keys(user);
@@ -82,9 +78,12 @@ export const userUpdateService = async (
     throw new AppError("Unable to update isAdm, isActive and id", 401)
     ;
   }
+  console.log(accountUpdated);
+
+  console.log({ ...instanceToPlain(accountUpdated) });
 
   await userRepository.update(accountUpdated!.id, {
-    ...accountUpdated,
+    ...instanceToPlain(accountUpdated),
     ...user,
     updatedAt: new Date(),
   });

@@ -1,3 +1,4 @@
+import { instanceToPlain } from "class-transformer";
 import { Request, Response } from "express";
 import AppDataSource from "../../data-source";
 import { User } from "../../entities/user.entity";
@@ -8,7 +9,7 @@ export const userCreateController = async (req: Request, res: Response) => {
     const { name, email, password, isAdm } = req.body;
     const userCreated = await userCreateService({ name, email, password, isAdm });
 
-    return res.status(201).json(userCreated);
+    return res.status(201).json(instanceToPlain(userCreated));
   } catch (error) {
     if (error instanceof Error) {
       return res.status(400).json({
@@ -23,7 +24,7 @@ export const userListController = async (req: Request, res: Response) => {
   try {
     const allUsers = await userListService();
 
-    return res.json(allUsers);
+    return res.json(instanceToPlain(allUsers));
   } catch (error) {
     if (error instanceof Error) {
       return res.status(401).json({

@@ -9,7 +9,7 @@ export class Adress {
   @Column()
   district: string;
 
-  @Column()
+  @Column({ length: 8 })
   zipCode: string;
 
   @Column()
@@ -18,10 +18,8 @@ export class Adress {
   @Column()
   city: string;
 
-  @Column()
+  @Column({ length: 2 })
   state: string;
 
-  @OneToOne(() => Property)
-  @JoinColumn()
-  address: Adress;
+
 }

@@ -23,7 +23,7 @@ export class Schedules_user_propertie {
   @JoinColumn()
   properties: Property;
 
-  @ManyToOne(() => User, { eager: true })
+  @ManyToOne(() => User, (user) => user.schedules, { eager: true })
   @JoinColumn()
   user: User;
 }
