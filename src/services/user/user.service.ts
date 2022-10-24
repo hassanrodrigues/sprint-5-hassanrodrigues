@@ -78,9 +78,6 @@ export const userUpdateService = async (
     throw new AppError("Unable to update isAdm, isActive and id", 401)
     ;
   }
-  console.log(accountUpdated);
-
-  console.log({ ...instanceToPlain(accountUpdated) });
 
   await userRepository.update(accountUpdated!.id, {
     ...instanceToPlain(accountUpdated),
