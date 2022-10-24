@@ -11,7 +11,7 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    command: bash -c "yarn typeorm migration:run -d src/data-source && yarn dev"
+    command: bash -c "yarn typeorm migration:run -d src/data-source"
     volumes:
       - .:/app
 
@@ -23,7 +23,7 @@ services:
     env_file:
       - .env
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U $POSTGRES_USER -d $POSTGRES_DB" ]
+      test: [ "CMD-SHELL", "pg_isready -U $POSTGRES_USER  -d $POSTGRES_DB" ]
       interval: 10s
       timeout: 5s
       retries: 5

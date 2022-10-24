@@ -3,6 +3,7 @@ import { User } from "../../entities/user.entity";
 import { IUserLogin } from "../../interfaces/users";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import "dotenv/config";
 
 export const userSessionService = async ({
   email,
