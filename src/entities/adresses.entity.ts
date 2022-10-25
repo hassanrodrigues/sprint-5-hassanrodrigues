@@ -20,6 +20,4 @@ export class Adress {
 
   @Column({ length: 2 })
   state: string;
-
-
 }
