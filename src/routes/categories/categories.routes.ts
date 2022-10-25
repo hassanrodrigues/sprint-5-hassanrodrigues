@@ -7,5 +7,4 @@ categoriesRouter.post("", authUser, isAdminMiddleware, createCategoryController)
 categoriesRouter.get("", listCategoriesController);
 categoriesRouter.get("/:id/properties", categoryListPropetyController);
 
-
 export default categoriesRouter;

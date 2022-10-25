@@ -12,5 +12,6 @@ export const propertiesCreateController = async (req: Request, res: Response) =>
 }
 export const propertiesListController = async (req: Request, res: Response) => {
     const properties = await propertiesListService();
+
     return res.json(properties);
 };

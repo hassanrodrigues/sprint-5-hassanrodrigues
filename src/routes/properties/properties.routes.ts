@@ -10,4 +10,5 @@ propertiesRoutes.post(
     propertiesCreateController
 );
 propertiesRoutes.get("", propertiesListController);
+
 export default propertiesRoutes;

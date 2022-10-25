@@ -47,5 +47,4 @@ export const categoryListPropetyService = async (id: string): Promise<Category> 
     } catch (error) {
         throw new AppError("ID Invalid", 404);
     }
-
 }

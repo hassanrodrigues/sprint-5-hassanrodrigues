@@ -53,7 +53,6 @@ export const userDeleteController = async (req: Request, res: Response) => {
     const { id } = req.params;
     await userDeleteService(id);
 
-
     return res.status(204).json({ message: "User deleted!" });
   } catch (error) {
     if (error instanceof Error) {

@@ -28,6 +28,7 @@ export const authUser = (req: Request, res: Response, next: NextFunction) => {
     return res.status(401).json({ message: "Invalid Token" });
   }
 };
+
 export const isAccountExistsMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   const id = req.params.id;
   const userRepository = AppDataSource.getRepository(User);
@@ -67,6 +68,7 @@ export const isAdminMiddleware = async (req: Request, res: Response, next: NextF
 
   return next();
 };
+
 export const updateAdmin = async (req: Request, res: Response, next: NextFunction) => {
   const email = req.user.email;
   if (!email) {
