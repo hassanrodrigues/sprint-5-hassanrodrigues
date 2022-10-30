@@ -62,7 +62,6 @@ export const userUpdateService = async (
   const allUsers = await userRepository.find();
   const accountUpdated = allUsers.find((user) => user.id === id);
 
-
   const data = Object.keys(user);
   //  verify if exist isAdm, isActive and id
   const isAdm = data.includes("isAdm");

@@ -3,7 +3,6 @@ import AppDataSource from "../../data-source";
 import { Category } from "../../entities/category.entity";
 import { categoryCreateService, categoryListPropetyService, categoryListService } from "../../services/categories/categories.service";
 
-
 export const createCategoryController = async (req: Request, res: Response) => {
     const createdCategory = await categoryCreateService(req.body);
 

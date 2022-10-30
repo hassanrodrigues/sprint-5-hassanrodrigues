@@ -65,7 +65,6 @@ export const userDeleteController = async (req: Request, res: Response) => {
 };
 
 export const userUpdateController = async (req: Request, res: Response) => {
-
   const dataUser = req.body
 
   const { id } = req.params;
