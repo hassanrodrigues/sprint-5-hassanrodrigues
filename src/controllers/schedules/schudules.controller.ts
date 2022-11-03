@@ -3,7 +3,6 @@ import { schedulesCreateService, schedulesListService } from "../../services/sch
 
 //create schedule controller
 export const schedulesCreateController = async (req: Request, res: Response) => {
-
     const schedule = req.body;
     const userId = req.user.id;
     const scheduleCreated = await schedulesCreateService(schedule, userId);

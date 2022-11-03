@@ -6,9 +6,9 @@ import { AppError } from "../../errors/appError";
 import { IPropertyRequest } from "../../interfaces/properties";
 
 //create property, adress, category getRepository
-const propertiesInfoRepository = AppDataSource.getRepository(Property);
-const adressInfoRepository = AppDataSource.getRepository(Adress);
-const categoryInfoRepository = AppDataSource.getRepository(Category);
+const propertiesRepository = AppDataSource.getRepository(Property);
+const adressRepository = AppDataSource.getRepository(Adress);
+const categoryRepository = AppDataSource.getRepository(Category);
 
 export const propertyCreateService = async (propertie: IPropertyRequest): Promise<Property> => {
 
@@ -16,7 +16,7 @@ export const propertyCreateService = async (propertie: IPropertyRequest): Promis
         throw new AppError("Check the required fields");
     }
 
-    const category = await categoryInfoRepository.findOne({
+    const category = await categoryRepository.findOne({
         where: {
             id: propertie.categoryId,
         },
@@ -24,7 +24,7 @@ export const propertyCreateService = async (propertie: IPropertyRequest): Promis
     if (!category) {
         throw new AppError("Category not found", 404);
     }
-    const adressesExists = await adressInfoRepository.findOne({
+    const adressesExists = await adressRepository.findOne({
         where: propertie.address,
     });
 
@@ -39,15 +39,15 @@ export const propertyCreateService = async (propertie: IPropertyRequest): Promis
         throw new AppError("Invalid State");
     }
 
-    const newAdresses = adressInfoRepository.create(propertie.address);
-    await adressInfoRepository.save(newAdresses);
+    const newAdresses = adressRepository.create(propertie.address);
+    await adressRepository.save(newAdresses);
 
-    const newPropertie = propertiesInfoRepository.create({
+    const newPropertie = propertiesRepository.create({
         ...propertie,
         address: newAdresses,
         category,
     });
-    const propertyExists = await propertiesInfoRepository.findOne({
+    const propertyExists = await propertiesRepository.findOne({
         where: {
             value: propertie.value,
         },
@@ -55,13 +55,13 @@ export const propertyCreateService = async (propertie: IPropertyRequest): Promis
     if (propertyExists) {
         throw new AppError("Property already exists");
     }
-    await propertiesInfoRepository.save(newPropertie);
+    await propertiesRepository.save(newPropertie);
 
     return newPropertie;
 }
 
 export const propertiesListService = async (): Promise<Property[]> => {
-    const properties = await propertiesInfoRepository.find({
+    const properties = await propertiesRepository.find({
         relations: {
             address: true,
             category: true,

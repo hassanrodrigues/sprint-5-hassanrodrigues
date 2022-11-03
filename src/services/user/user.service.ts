@@ -40,8 +40,6 @@ export const userListService = async (): Promise<User[]> => {
   return users;
 };
 
-
-
 export const userDeleteService = async (id: string) => {
   const userRepository = AppDataSource.getRepository(User);
   const userDeleted = await userRepository.findOneBy({ id });
@@ -56,8 +54,6 @@ export const userDeleteService = async (id: string) => {
   return true;
 };
 
-
-
 export const userUpdateService = async (
   user: Partial<User>,
   id: string
@@ -66,13 +62,11 @@ export const userUpdateService = async (
   const allUsers = await userRepository.find();
   const accountUpdated = allUsers.find((user) => user.id === id);
 
-
   const data = Object.keys(user);
   //  verify if exist isAdm, isActive and id
   const isAdm = data.includes("isAdm");
   const isActive = data.includes("isActive");
   const isId = data.includes("id");
-
 
   if (isAdm || isActive || isId) {
     throw new AppError("Unable to update isAdm, isActive and id", 401)
@@ -84,7 +78,6 @@ export const userUpdateService = async (
     ...user,
     updatedAt: new Date(),
   });
-
 
   return ["Updated!", 200];
 };
